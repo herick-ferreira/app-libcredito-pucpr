@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Autenticação Microsoft
+                </h4>
+            </div>
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-university fa-4x text-primary mb-3"></i>
+                    <h2>Sistema de Liberação de Crédito Universitário</h2>
+                    <p class="lead text-muted">
+                        Plataforma segura para solicitação de crédito educacional
+                    </p>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Para acessar o sistema, faça login com sua conta Microsoft:</h5>
+                </div>
+                
+                <a href="{{ auth_url }}" class="btn btn-primary btn-lg">
+                    <i class="fab fa-microsoft me-2"></i>
+                    Entrar com Microsoft
+                </a>
+                
+                <div class="mt-4">
+                    <small class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i>
+                        Autenticação segura via Azure Active Directory
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-lock fa-2x text-success mb-2"></i>
+                        <h6>Seguro</h6>
+                        <small class="text-muted">Autenticação Microsoft Azure AD</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-bolt fa-2x text-warning mb-2"></i>
+                        <h6>Rápido</h6>
+                        <small class="text-muted">Processamento em tempo real</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-cloud fa-2x text-info mb-2"></i>
+                        <h6>Confiável</h6>
+                        <small class="text-muted">Hospedado no Azure</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

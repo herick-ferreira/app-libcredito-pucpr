@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white text-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Crédito Aprovado!
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-thumbs-up fa-4x text-success mb-3"></i>
+                    <h3 class="text-success">Parabéns, {{ cliente.nome }}!</h3>
+                    <p class="lead">Seu crédito universitário foi aprovado com sucesso.</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Dados da Solicitação</h6>
+                                <ul class="list-unstyled">
+                                    <li><strong>Cliente ID:</strong> {{ cliente.cliente_id }}</li>
+                                    <li><strong>Nome:</strong> {{ cliente.nome }}</li>
+                                    <li><strong>Curso:</strong> {{ cliente.curso }}</li>
+                                    <li><strong>Semestre:</strong> {{ cliente.semestre }}º</li>
+                                    <li><strong>Valor Aprovado:</strong> <span class="text-success fw-bold">R$ {{ "%.2f"|format(cliente.valor_solicitado) }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h6 class="card-title">Critérios Atendidos</h6>
+                                <ul class="list-unstyled">
+                                    {% for criterio, atendido in resultado.criterios_atendidos.items() %}
+                                    <li>
+                                        <i class="fas fa-{{ 'check' if atendido else 'times' }} me-2"></i>
+                                        {% if criterio == 'valor_limite' %}Valor dentro do limite
+                                        {% elif criterio == 'score_minimo' %}Score de crédito adequado
+                                        {% elif criterio == 'renda_suficiente' %}Renda suficiente
+                                        {% elif criterio == 'sem_pendencias' %}Sem pendências acadêmicas
+                                        {% endif %}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-info-circle me-2"></i>Próximos Passos:</h6>
+                    <ol class="mb-0">
+                        <li>Os dados foram enviados para o Sistema X para processamento</li>
+                        <li>Um contrato será gerado automaticamente</li>
+                        <li>Você receberá um e-mail com os detalhes do contrato</li>
+                        <li>O valor será liberado após assinatura do contrato</li>
+                    </ol>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-home me-2"></i>
+                        Voltar ao Início
+                    </a>
+                    <a href="{{ url_for('solicitar_credito') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        Nova Solicitação
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

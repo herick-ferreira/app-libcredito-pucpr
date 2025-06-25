@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Erro de Autenticação{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Erro de Autenticação
+                </h4>
+            </div>
+            <div class="card-body text-center">
+                <i class="fas fa-user-times fa-4x text-danger mb-3"></i>
+                <h5>Não foi possível autenticar</h5>
+                <p class="text-muted">{{ result.error_description or result.error }}</p>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('login') }}" class="btn btn-primary">
+                        <i class="fas fa-redo me-2"></i>
+                        Tentar Novamente
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

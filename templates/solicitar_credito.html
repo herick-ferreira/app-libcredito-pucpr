@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-credit-card me-2"></i>
+                    Solicitação de Crédito Universitário - PUCPR
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('processar_credito') }}" id="creditForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="mb-3">Dados Pessoais</h5>
+                            
+                            <div class="mb-3">
+                                <label for="cliente_id" class="form-label">ID do Cliente*</label>
+                                <input type="text" class="form-control" id="cliente_id" name="cliente_id" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome Completo*</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF*</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" 
+                                       pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" 
+                                       placeholder="000.000.000-00" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="renda_mensal" class="form-label">Renda Mensal (R$)*</label>
+                                <input type="number" class="form-control" id="renda_mensal" name="renda_mensal" 
+                                       step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5 class="mb-3">Dados Acadêmicos</h5>
+                            
+                            <div class="mb-3">
+                                <label for="curso" class="form-label">Curso*</label>
+                                <select class="form-select" id="curso" name="curso" required>
+                                    <option value="">Selecione o curso</option>
+                                    <option value="Administração">Administração</option>
+                                    <option value="Arquitetura e Urbanismo">Arquitetura e Urbanismo</option>
+                                    <option value="Ciência da Computação">Ciência da Computação</option>
+                                    <option value="Direito">Direito</option>
+                                    <option value="Economia">Economia</option>
+                                    <option value="Enfermagem">Enfermagem</option>
+                                    <option value="Engenharia Civil">Engenharia Civil</option>
+                                    <option value="Engenharia de Produção">Engenharia de Produção</option>
+                                    <option value="Engenharia Elétrica">Engenharia Elétrica</option>
+                                    <option value="Engenharia Mecânica">Engenharia Mecânica</option>
+                                    <option value="Medicina">Medicina</option>
+                                    <option value="Medicina Veterinária">Medicina Veterinária</option>
+                                    <option value="Psicologia">Psicologia</option>
+                                    <option value="Sistemas de Informação">Sistemas de Informação</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="semestre" class="form-label">Semestre*</label>
+                                <select class="form-select" id="semestre" name="semestre" required>
+                                    <option value="">Selecione o semestre</option>
+                                    <option value="1">1º Semestre</option>
+                                    <option value="2">2º Semestre</option>
+                                    <option value="3">3º Semestre</option>
+                                    <option value="4">4º Semestre</option>
+                                    <option value="5">5º Semestre</option>
+                                    <option value="6">6º Semestre</option>
+                                    <option value="7">7º Semestre</option>
+                                    <option value="8">8º Semestre</option>
+                                    <option value="9">9º Semestre</option>
+                                    <option value="10">10º Semestre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="valor_solicitado" class="form-label">Valor Solicitado (R$)*</label>
+                                <input type="number" class="form-control" id="valor_solicitado" name="valor_solicitado" 
+                                       step="0.01" min="100" max="5000" required>
+                                <div class="form-text">Limite máximo: R$ 5.000,00</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Possui pendências acadêmicas?*</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pendencias_academicas" 
+                                               id="pendencias_nao" value="nao" required>
+                                        <label class="form-check-label" for="pendencias_nao">Não</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pendencias_academicas" 
+                                               id="pendencias_sim" value="sim">
+                                        <label class="form-check-label" for="pendencias_sim">Sim</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <h6><i class="fas fa-info-circle me-2"></i>Critérios de Aprovação:</h6>
+                                <ul class="mb-0">
+                                    <li>Valor solicitado até R$ 5.000</li>
+                                    <li>Renda mínima de 2x o valor solicitado</li>
+                                    <li>Score de crédito adequado</li>
+                                    <li>Sem pendências acadêmicas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Solicitar Crédito
+                            </button>
+                            <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Voltar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('creditForm').addEventListener('submit', function(e) {
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processando...';
+    submitBtn.disabled = true;
+});
+
+// Máscara para CPF
+document.getElementById('cpf').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    e.target.value = value;
+});
+
+// Validação em tempo real do valor
+document.getElementById('valor_solicitado').addEventListener('input', function(e) {
+    const valor = parseFloat(e.target.value);
+    const rendaInput = document.getElementById('renda_mensal');
+    const renda = parseFloat(rendaInput.value);
+    
+    if (valor > 5000) {
+        e.target.setCustomValidity('Valor máximo permitido: R$ 5.000');
+    } else if (renda && renda < (valor * 2)) {
+        e.target.setCustomValidity('Renda insuficiente. Necessária renda mínima de 2x o valor solicitado');
+    } else {
+        e.target.setCustomValidity('');
+    }
+});
+
+document.getElementById('renda_mensal').addEventListener('input', function(e) {
+    const valorInput = document.getElementById('valor_solicitado');
+    const valor = parseFloat(valorInput.value);
+    const renda = parseFloat(e.target.value);
+    
+    if (valor && renda < (valor * 2)) {
+        valorInput.setCustomValidity('Renda insuficiente. Necessária renda mínima de 2x o valor solicitado');
+    } else {
+        valorInput.setCustomValidity('');
+    }
+});
+</script>
+{% endblock %}

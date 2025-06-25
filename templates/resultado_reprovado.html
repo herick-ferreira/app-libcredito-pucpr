@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white text-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-times-circle me-2"></i>
+                    Crédito Não Aprovado
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>
+                    <h3 class="text-danger">Solicitação Não Aprovada</h3>
+                    <p class="lead">Infelizmente, sua solicitação de crédito não foi aprovada neste momento.</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Dados da Solicitação</h6>
+                                <ul class="list-unstyled">
+                                    <li><strong>Cliente ID:</strong> {{ cliente.cliente_id }}</li>
+                                    <li><strong>Nome:</strong> {{ cliente.nome }}</li>
+                                    <li><strong>Curso:</strong> {{ cliente.curso }}</li>
+                                    <li><strong>Semestre:</strong> {{ cliente.semestre }}º</li>
+                                    <li><strong>Valor Solicitado:</strong> R$ {{ "%.2f"|format(cliente.valor_solicitado) }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h6 class="card-title">Motivos da Reprovação</h6>
+                                <ul class="list-unstyled">
+                                    {% for motivo in resultado.motivo_reprovacao %}
+                                    <li>
+                                        <i class="fas fa-times me-2"></i>
+                                        {% if motivo == 'valor_limite' %}Valor solicitado acima do limite (R$ 5.000)
+                                        {% elif motivo == 'score_minimo' %}Score de crédito insuficiente
+                                        {% elif motivo == 'renda_suficiente' %}Renda insuficiente (mínimo 2x o valor)
+                                        {% elif motivo == 'sem_pendencias' %}Possui pendências acadêmicas
+                                        {% endif %}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="alert alert-warning">
+                    <h6><i class="fas fa-lightbulb me-2"></i>Dicas para Aprovação:</h6>
+                    <ul class="mb-0">
+                        <li>Solicite um valor menor (máximo R$ 5.000)</li>
+                        <li>Comprove renda mínima de 2x o valor solicitado</li>
+                        <li>Quite eventuais pendências acadêmicas</li>
+                        <li>Aguarde para melhorar seu score de crédito</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-envelope me-2"></i>Notificação:</h6>
+                    <p class="mb-0">
+                        Você receberá um e-mail com os detalhes da análise e orientações para uma futura solicitação.
+                        O registro foi salvo em nosso sistema para histórico.
+                    </p>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('solicitar_credito') }}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-redo me-2"></i>
+                        Tentar Novamente
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-home me-2"></i>
+                        Voltar ao Início
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

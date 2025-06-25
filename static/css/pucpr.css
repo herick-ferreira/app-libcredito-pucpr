@@ -1,0 +1,143 @@
+/* PUCPR - Pontifícia Universidade Católica do Paraná */
+/* Cores oficiais da PUCPR */
+
+:root {
+    --pucpr-primary: #610127;
+    --pucpr-primary-dark: #4a0d1e;
+    --pucpr-primary-light: #7a1530;
+    --pucpr-secondary: #f8f9fa;
+    --pucpr-accent: #28a745;
+    --pucpr-warning: #ffc107;
+    --pucpr-info: #17a2b8;
+    --pucpr-danger: #dc3545;
+}
+
+/* Override Bootstrap colors */
+.btn-primary {
+    background-color: var(--pucpr-primary);
+    border-color: var(--pucpr-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--pucpr-primary-dark);
+    border-color: var(--pucpr-primary-dark);
+}
+
+.bg-primary {
+    background-color: var(--pucpr-primary) !important;
+}
+
+.text-primary {
+    color: var(--pucpr-primary) !important;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.pucpr-logo {
+    height: 40px;
+    margin-right: 10px;
+    filter: brightness(0) invert(1); /* Make logo white in dark navbar */
+}
+
+/* Cards and components */
+.card {
+    box-shadow: 0 4px 8px rgba(97, 1, 39, 0.1);
+    border: none;
+}
+
+.card-header.bg-primary {
+    background: linear-gradient(135deg, var(--pucpr-primary) 0%, var(--pucpr-primary-dark) 100%);
+}
+
+/* Login page specific */
+.login-logo {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--pucpr-secondary) 0%, #e9ecef 100%);
+    padding: 20px 0;
+    margin-top: 50px;
+    border-top: 3px solid var(--pucpr-primary);
+}
+
+/* Statistics cards */
+.stats-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Form enhancements */
+.form-control:focus {
+    border-color: var(--pucpr-primary);
+    box-shadow: 0 0 0 0.2rem rgba(97, 1, 39, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--pucpr-primary);
+    box-shadow: 0 0 0 0.2rem rgba(97, 1, 39, 0.25);
+}
+
+/* Alert customizations */
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: var(--pucpr-accent);
+    color: var(--pucpr-accent);
+}
+
+.alert-danger {
+    background-color: rgba(97, 1, 39, 0.1);
+    border-color: var(--pucpr-primary);
+    color: var(--pucpr-primary);
+}
+
+/* Custom utilities */
+.text-pucpr-primary {
+    color: var(--pucpr-primary) !important;
+}
+
+.bg-pucpr-primary {
+    background-color: var(--pucpr-primary) !important;
+}
+
+.border-pucpr-primary {
+    border-color: var(--pucpr-primary) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pucpr-logo {
+        height: 30px;
+    }
+    
+    .login-logo {
+        height: 60px;
+    }
+}
+
+/* Loading animations */
+.loading-spinner {
+    color: var(--pucpr-primary);
+}
+
+/* Custom hover effects */
+.btn-outline-primary {
+    color: var(--pucpr-primary);
+    border-color: var(--pucpr-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--pucpr-primary);
+    border-color: var(--pucpr-primary);
+}
