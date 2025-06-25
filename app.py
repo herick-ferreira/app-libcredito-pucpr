@@ -27,6 +27,8 @@ DB_CONFIG = {
     'database': os.environ.get('PGDATABASE')
 }
 
+
+
 # URL do Logic App
 LOGIC_APP_URL = os.environ.get('LOGIC_APP_URL')
 
@@ -47,7 +49,7 @@ class DatabaseManager:
             ], capture_output=True, text=True, check=True)
             return result.stdout.strip()
         except subprocess.CalledProcessError as e:
-            logger.error(f"Erro ao obter token Azure: {e}")
+            logger.error(f"Erro ao obter token A: {e}")
             return None
     
     def get_connection(self):
